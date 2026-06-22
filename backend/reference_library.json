@@ -1,0 +1,22 @@
+{
+  "Elite": {
+    "Gymnastics": {
+      "airtime_ms": [1100, 1300],
+      "tuck_depth_deg": [25, 40],
+      "peak_height_norm": [0.65, 0.75],
+      "rotation_speed_deg_sec": [450, 550]
+    },
+    "Parkour": {
+      "airtime_ms": [1000, 1200],
+      "tuck_depth_deg": [30, 45],
+      "peak_height_norm": [0.60, 0.70],
+      "rotation_speed_deg_sec": [400, 500]
+    },
+    "Tricking": {
+      "airtime_ms": [950, 1150],
+      "tuck_depth_deg": [35, 50],
+      "peak_height_norm": [0.55, 0.65],
+      "rotation_speed_deg_sec": [500, 600]
+    }
+  }
+}

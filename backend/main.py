@@ -4,7 +4,7 @@ import shutil
 import os
 import uuid
 from .processor import process_video
-from .knowledge_layer import get_coaching_insights, compare_to_reference
+from .knowledge_layer import get_coaching_insights, compare_to_reference, calculate_scores
 import json
 
 app = FastAPI()
@@ -42,6 +42,7 @@ def run_processing(job_id, file_path):
 
         insights = get_coaching_insights(data)
         comparison = compare_to_reference(data['metrics'])
+        scores = calculate_scores(data['metrics'])
 
         jobs[job_id] = {
             "status": "completed",
@@ -51,15 +52,25 @@ def run_processing(job_id, file_path):
                 "phases": data['phases'],
                 "metrics": data['metrics'],
                 "insights": insights,
-                "comparison": comparison
+                "comparison": comparison,
+                "scores": scores
             }
         }
     except Exception as e:
+        import traceback
+        print(traceback.format_exc())
         jobs[job_id] = {"status": "failed", "error": str(e)}
 
 @app.get("/status/{job_id}")
 async def get_status(job_id: str):
     return jobs.get(job_id, {"status": "not_found"})
+
+@app.get("/validation-report")
+async def get_validation_report():
+    if os.path.exists("validation_report.json"):
+        with open("validation_report.json", "r") as f:
+            return json.load(f)
+    return {"error": "Report not found"}
 
 if __name__ == "__main__":
     import uvicorn

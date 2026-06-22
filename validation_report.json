@@ -1,0 +1,37 @@
+{
+  "summary": "Validation Analysis: Successful vs. Failed Backflips",
+  "distributions": {
+    "PeakHeightNorm": {
+      "success_mean": 0.646,
+      "failure_mean": 0.454,
+      "separation": 0.192
+    },
+    "MaxKneeFlexion": {
+      "success_mean": 34.3,
+      "failure_mean": 65.4,
+      "separation": 31.1
+    },
+    "MaxHipFlexion": {
+      "success_mean": 39.4,
+      "failure_mean": 70.6,
+      "separation": 31.2
+    },
+    "AirtimeMs": {
+      "success_mean": 1092.0,
+      "failure_mean": 757.0,
+      "separation": 335.0
+    }
+  },
+  "correlations": {
+    "PeakHeightNorm": 0.953,
+    "MaxKneeFlexion": -0.923,
+    "MaxHipFlexion": -0.923,
+    "AirtimeMs": 0.944
+  },
+  "strongest_predictors": [
+    "PeakHeightNorm",
+    "AirtimeMs",
+    "MaxKneeFlexion",
+    "MaxHipFlexion"
+  ]
+}
