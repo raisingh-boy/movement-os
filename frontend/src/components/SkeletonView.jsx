@@ -1,5 +1,5 @@
 import React, { useRef, useMemo } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
 
@@ -9,14 +9,10 @@ const CONNECTIONS = [
   [23, 25], [25, 27], [27, 31], [24, 26], [26, 28], [28, 32] // Lower body
 ];
 
-function Skeleton({ frameData }) {
-  const pointsRef = useRef();
-  const linesRef = useRef();
-
+function Skeleton({ frameData, comData, trajectory }) {
   const points = useMemo(() => {
     if (!frameData) return [];
-    // Scale and center the dummy skeleton for visibility
-    return frameData.map(lm => new THREE.Vector3((lm.x - 0.5) * 2, (0.5 - lm.y) * 2, -lm.z * 2));
+    return frameData.map(lm => new THREE.Vector3((lm.x - 0.5) * 4, (0.5 - lm.y) * 4, -lm.z * 4));
   }, [frameData]);
 
   const lineGeometry = useMemo(() => {
@@ -26,8 +22,8 @@ function Skeleton({ frameData }) {
       const p1 = frameData[i];
       const p2 = frameData[j];
       if (p1 && p2) {
-        vertices.push((p1.x - 0.5) * 2, (0.5 - p1.y) * 2, -p1.z * 2);
-        vertices.push((p2.x - 0.5) * 2, (0.5 - p2.y) * 2, -p2.z * 2);
+        vertices.push((p1.x - 0.5) * 4, (0.5 - p1.y) * 4, -p1.z * 4);
+        vertices.push((p2.x - 0.5) * 4, (0.5 - p2.y) * 4, -p2.z * 4);
       }
     });
     const geometry = new THREE.BufferGeometry();
@@ -35,31 +31,55 @@ function Skeleton({ frameData }) {
     return geometry;
   }, [frameData]);
 
+  const trajectoryGeometry = useMemo(() => {
+    if (!trajectory) return new THREE.BufferGeometry();
+    const vertices = [];
+    trajectory.forEach(p => {
+      if (p) vertices.push((p.x - 0.5) * 4, (0.5 - p.y) * 4, -p.z * 4);
+    });
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+    return geometry;
+  }, [trajectory]);
+
   return (
     <group>
+      {/* Skeleton Joints */}
       {points.map((p, i) => (
         <mesh key={i} position={p}>
-          <sphereGeometry args={[0.02, 16, 16]} />
-          <meshBasicMaterial color="red" />
+          <sphereGeometry args={[0.03, 16, 16]} />
+          <meshBasicMaterial color={i < 11 ? "#4facfe" : "#f093fb"} />
         </mesh>
       ))}
+      {/* Skeleton Bones */}
       <lineSegments geometry={lineGeometry}>
-        <lineBasicMaterial color="white" />
+        <lineBasicMaterial color="white" linewidth={2} />
       </lineSegments>
+      {/* Center of Mass */}
+      {comData && (
+        <mesh position={[(comData.x - 0.5) * 4, (0.5 - comData.y) * 4, -comData.z * 4]}>
+          <sphereGeometry args={[0.06, 16, 16]} />
+          <meshBasicMaterial color="yellow" />
+        </mesh>
+      )}
+      {/* Motion Trail (Trajectory) */}
+      <line geometry={trajectoryGeometry}>
+        <lineBasicMaterial color="#ffff00" transparent opacity={0.4} />
+      </line>
     </group>
   );
 }
 
-export default function SkeletonView({ frameData }) {
+export default function SkeletonView({ frameData, comData, trajectory }) {
   return (
-    <div style={{ width: '100%', height: '500px', background: '#111' }} className="skeleton-canvas">
+    <div style={{ width: '100%', height: '550px', background: 'radial-gradient(circle, #222 0%, #000 100%)' }}>
       <Canvas>
-        <PerspectiveCamera makeDefault position={[0, 0, 5]} />
+        <PerspectiveCamera makeDefault position={[5, 0, 0]} />
         <OrbitControls />
         <ambientLight intensity={1.0} />
         <pointLight position={[10, 10, 10]} />
-        <Skeleton frameData={frameData} />
-        <gridHelper args={[10, 10]} rotation={[Math.PI / 2, 0, 0]} />
+        <Skeleton frameData={frameData} comData={comData} trajectory={trajectory} />
+        <gridHelper args={[20, 20, 0x444444, 0x222222]} rotation={[Math.PI / 2, 0, 0]} />
       </Canvas>
     </div>
   );
