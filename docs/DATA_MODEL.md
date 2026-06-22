@@ -24,6 +24,12 @@ A movement is represented as a "Deep Movement Object" (DMO), consisting of sever
 *   **Common Mistakes:** Identified deviations from "efficient" or "safe" patterns.
 *   **Variations & Progressions:** Logical links to easier/harder versions or stylistic alternatives.
 
+### Layer 5: Social & Gamification (Honest-Core)
+*   **Skill Tree Position:** Discrete milestones achieved (e.g., "Backflip - Level 1: Standard").
+*   **Style Signature:** A unique vector representing the athlete's specific technique (timing/compactness/velocity).
+*   **Challenge History:** Participation in ranked/community challenges.
+*   **Trust Badge:** Verification of capture standard (e.g., "Verified Capture").
+
 ## 2. Normalization Strategies for Human Diversity (Question 4)
 
 To ensure fair comparison across diverse populations, the system employs several normalization techniques:

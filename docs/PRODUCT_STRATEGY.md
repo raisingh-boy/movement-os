@@ -17,10 +17,12 @@
 *   **Weaknesses:** Requires high trust in the scoring system, risk of encouraging dangerous behavior for higher scores.
 *   **Realistic Path:** High. Provides an objective "Global Leaderboard" for movement quality.
 
-## Recommendation: The "Hybrid Progression" Path
+## Recommendation: The "Social-First" Pivot
 
-1.  **Stage 1: The Expert Tool (Current focus)**
-    Prove that the AI analysis is scientifically valid and provides "Genuinely Useful Feedback." Build trust with the athlete.
+The platform will pivot to prioritize **Engagement and Social Proof** as the primary driver for data acquisition and community building.
+
+1.  **Stage 1: The Social MVP (Backflip Social)**
+    Test the core loop: Record -> Honest Metrics -> Ghost Overlay -> Share. Use "Honest Signals" to build trust without claiming scientific perfection.
 2.  **Stage 2: The Ranking System**
     Introduce the multi-dimensional scores (Jump Power, Tuck Quality) to allow athletes to compare themselves objectively against the "Elite Reference Library."
 3.  **Stage 3: Social Proof**

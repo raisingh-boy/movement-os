@@ -10,12 +10,16 @@ The platform employs a robust, multi-modal ingestion pipeline designed to extrac
 *   **Textual Descriptions:** Captions, comments, blog posts, course transcripts, and biomechanics textbooks.
 *   **Metadata:** Originating source, practitioner identity, expertise level, stylistic context (e.g., "Parkour," "Contemporary Dance"), and environmental conditions.
 
-### Video Processing Workflow
-1.  **Ingestion & Normalization:** Standardizing resolutions and frame rates.
-2.  **Segment Identification:** AI-driven detection of discrete movement "events" (e.g., a single jump, a transition).
-3.  **Pose Estimation (3D):** Multi-stage pose estimation (e.g., using MediaPipe, AlphaPose, or custom transformers) to derive 3D skeletal data.
-4.  **Dynamics Extraction:** Calculating velocities, accelerations, and center of mass trajectories.
-5.  **Contextual Feature Extraction:** Identifying interactions with objects or other people (crucial for Contact Improvisation and Parkour).
+### Video Processing Workflow (Honest Metrics Pipeline)
+1.  **Ingestion & Quality Gate:** Standardizing resolutions/FPS and validating "Capture Standard" (light, plane, stability).
+2.  **Segment Identification:** Precise detection of "Airtime" (Takeoff to Landing) without synthetic multipliers.
+3.  **Pose Estimation (3D):** Extraction of joint coordinates using MediaPipe Tasks (standardized).
+4.  **Dynamics Extraction:**
+    *   **Airtime:** Mechanical timing of flight phase.
+    *   **Total Rotation:** Integrated body angle over the duration.
+    *   **Angular Velocity ($d\theta/dt$):** Temporal curve of rotation speed.
+    *   **Tuck Timing & Compactness:** Relative timing of knee-to-chest proximity.
+5.  **Contextual Feature Extraction:** Identification of stylistic markers for the **Similarity Engine**.
 
 ### Description & Metadata Extraction
 *   **Speech-to-Text:** Transcribing coaching cues and somatic descriptions.
@@ -33,8 +37,11 @@ To support 100,000+ videos and 1M+ segments, the system uses a distributed, even
 
 ### High-Level Components
 *   **Ingestion Engine:** A fleet of worker nodes consuming tasks from a message queue (Kafka/RabbitMQ) to process new content.
-*   **Feature Microservices:** Specialized services for skeletal analysis, biomechanics calculation, and NLP.
+*   **Similarity Engine:** K-Nearest Neighbors (KNN) or vector search over "Style Signatures" to find "Who you are closer to."
+*   **Ghost Synthesis Service:** Generating skeleton overlays from reference/past videos for "Ghost Playback."
+*   **Skill Tree & Achievement Service:** Logic for discrete milestone verification (e.g., "First 360", "5 Clean Streak").
 *   **Unified Graph Database:** (e.g., Neo4j or Neptune) to manage the complex relationships between movements, families, and practitioners.
+*   **Analytics Hub:** Tracking "North Star" metrics (Weekly Active Recorders, Share Rate, Retention).
 *   **API Gateway:** Providing authenticated access to the Knowledge Graph and visualization assets.
 
 ### Scaling Strategies

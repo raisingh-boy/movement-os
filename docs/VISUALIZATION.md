@@ -6,6 +6,7 @@ The platform provides a multi-dimensional interface for exploring movement knowl
 
 ### Core Visualization Components
 *   **3D Multi-Layer Playback:**
+    *   **Ghost Overlay:** Semi-transparent "ghost" skeleton of a past attempt or a reference athlete (Pro) synchronized with the current attempt.
     *   Toggleable overlays: skeleton, muscle activation (estimated), and center of mass.
     *   Adjustable camera angles in a virtual 3D space.
 *   **Phase-by-Phase Timeline:**
@@ -21,5 +22,6 @@ The platform provides a multi-dimensional interface for exploring movement knowl
 
 ### User Interaction Models
 *   **The "Coach's View":** Side-by-side comparison of a "Master" vs. a "Novice" with automatic highlighting of discrepancies in timing or alignment.
+*   **The "Social Signature Card":** A shareable infographic showing the "Style Signature," airtime, rotation speed, and "Similarity Match" with a pro athlete.
 *   **The "Researcher's View":** Access to raw data, biomechanical graphs, and cross-disciplinary links.
 *   **The "Practitioner's View":** Focus on progressions, sensations, and "the feel" of the movement to guide their own training.

@@ -11,6 +11,7 @@ The Movement Knowledge Graph (MKG) is the central intelligence core of the platf
 *   **Strategy Node:** Attentional or somatic strategies (e.g., "External Focus," "Center-Initiated Movement").
 *   **Method Node:** Coaching systems or styles (e.g., "Feldenkrais," "Art du Déplacement," "Vaganova").
 *   **Sensation Node:** Qualities of experience (e.g., "Buoyancy," "Grounding").
+*   **Achievement Node:** Discrete skill milestones (e.g., "Backflip Level 1").
 
 ### Edge Types (Relationships)
 *   **IS_A / PART_OF:** Hierarchy (e.g., "Back Tuck" IS_A "Salto").
@@ -20,6 +21,7 @@ The Movement Knowledge Graph (MKG) is the central intelligence core of the platf
 *   **PROVOKES_SENSATION:** Connecting physical form to experience.
 *   **CORRECTED_BY:** Linking common mistakes to specific coaching cues.
 *   **SYNONYMOUS_WITH:** Mapping different names for the same pattern across disciplines (e.g., Parkour's "Dash Vault" vs Gymnastics' "Hecht").
+*   **SIMILAR_TO:** A dynamic relationship based on "Style Signature" vector distance (e.g., "Practitioner A" SIMILAR_TO "Reference Athlete B").
 
 ### Graph Utilization
 *   **Pathfinding:** Recommending learning paths from a current skill to a goal skill.
